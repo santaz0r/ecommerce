@@ -35,6 +35,9 @@ const AddForm = ({ items }) => {
         image: {
             isRequired: {
                 message: "Добавьте изображение продукта"
+            },
+            isUrl: {
+                message: "Неправильно введен url"
             }
         },
         category: {
@@ -45,6 +48,10 @@ const AddForm = ({ items }) => {
         description: {
             isRequired: {
                 message: "Несколько строк о товаре"
+            },
+            max: {
+                message: "Не больше 250 символов",
+                value: 250
             }
         }
     };
@@ -57,7 +64,7 @@ const AddForm = ({ items }) => {
         return Object.keys(errors).length === 0;
     };
     const isValid = Object.keys(errors).length === 0;
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value

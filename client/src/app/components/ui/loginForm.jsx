@@ -4,7 +4,7 @@ import TextField from "../common/form/textField";
 const LoginForm = () => {
     const [data, setData] = useState({ email: "", password: "" });
     const [errors, setErrors] = useState({});
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
@@ -21,17 +21,7 @@ const LoginForm = () => {
             }
         },
         password: {
-            isRequired: { message: "Пароль обязателен для заполнения" },
-            isCapitalSymbol: {
-                message: "Пароль должен содержать заглавную букву"
-            },
-            isContainDigit: {
-                message: "Пароль должен содержать хотя бы одну цифру"
-            },
-            min: {
-                message: "Пароль должен состоять минимум 8 символов",
-                value: 8
-            }
+            isRequired: { message: "Пароль обязателен для заполнения" }
         }
     };
     const validate = () => {

@@ -7,31 +7,41 @@ const ProductCard = ({ products }) => {
 
     return products.map((product) => {
         return (
-            <div key={product.id} className="card d-flex">
-                <div className="d-flex justify-content-between align-items-center">
-                    <div>
+            <div key={product.id} className="card mb-3">
+                <div className="row g-0">
+                    <div className="col-md-4">
                         <img
-                            style={{ height: "15rem", maxWidth: "170px" }}
                             src={product.image}
-                            className="card-img-top "
+                            className="img-fluid rounded-start"
                             alt="product photo"
+                            style={{ maxHeight: "200px" }}
                         />
                     </div>
-                    <div style={{ maxWidth: "300px" }}>
+                    <div className="col-md-8">
                         <div className="card-body">
-                            <p>Product&apos;s id: #{product.id}</p>
                             <h5 className="card-title">{product.title}</h5>
-                            <p>Price: ${product.price}</p>
-                            <p>Rate: {product.rate}</p>
+                            <p className="card-text text-truncate">
+                                {product.description}
+                            </p>
+                            <p className="d-flex justify-content-between card-text">
+                                <small className="text-muted">
+                                    Рейтинг: {product.rate}
+                                </small>
+                                <small className="text-muted">
+                                    Цена: ${product.price}
+                                </small>
+                            </p>
+                            <button
+                                onClick={() =>
+                                    history.push(`/products/${product.id}`)
+                                }
+                                className="btn btn-primary"
+                                style={{ height: "40px" }}
+                            >
+                                Подробнее
+                            </button>
                         </div>
                     </div>
-                    <button
-                        onClick={() => history.push(`/products/${product.id}`)}
-                        className="btn btn-primary"
-                        style={{ height: "40px" }}
-                    >
-                        Подробнее
-                    </button>
                 </div>
             </div>
         );

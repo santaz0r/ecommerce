@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { validator } from "../../utils/validator";
+import CheckBoxField from "../common/form/checkBoxField";
 import TextField from "../common/form/textField";
 const RegisterForm = () => {
-    const [data, setData] = useState({ email: "", password: "" });
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        name: "",
+        licence: false
+    });
     const [errors, setErrors] = useState({});
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
@@ -32,6 +38,15 @@ const RegisterForm = () => {
                 message: "Пароль должен состоять минимум 8 символов",
                 value: 8
             }
+        },
+        name: {
+            isRequired: { message: "Имя обязательно для заполнения" }
+        },
+        licence: {
+            isRequired: {
+                message:
+                    "Вы не можете использовать наш сервис без лицензионного соглашения"
+            }
         }
     };
     const validate = () => {
@@ -49,6 +64,13 @@ const RegisterForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <TextField
+                label="Ваше имя"
+                name="name"
+                value={data.name}
+                onChange={handleChange}
+                error={errors.name}
+            />
+            <TextField
                 label="Почта"
                 name="email"
                 value={data.email}
@@ -63,6 +85,14 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 error={errors.password}
             />
+            <CheckBoxField
+                value={data.licence}
+                onChange={handleChange}
+                name="licence"
+                error={errors.licence}
+            >
+                Подтвердить <a>лицензионное соглашение</a>
+            </CheckBoxField>
             <button
                 className="btn btn-primary w-100 mx-auto"
                 disabled={!isValid}

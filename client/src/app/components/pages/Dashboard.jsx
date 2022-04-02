@@ -74,20 +74,21 @@ const Dashboard = () => {
 
     if (products) {
         return (
-            <>
+            <div className="container-fluid">
                 {!categoriesLoadingStatus ? (
-                    <div className="row">
+                    <div className="row mt-3">
                         <div className="col-md-2">
                             <AddForm items={categories} />
                         </div>
-                        <div className="col-md-6 offset-md-0 text-center">
+                        <div className="col-md-8">
+                            <h1>Список всех товаров</h1>
                             <Table columns={columns} data={products} />
                         </div>
                     </div>
                 ) : (
                     "loading"
                 )}
-            </>
+            </div>
         );
     }
     return "Loading";

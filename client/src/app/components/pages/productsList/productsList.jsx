@@ -88,8 +88,8 @@ const ProductsList = () => {
         };
 
         return (
-            <>
-                <>
+            <div className="container">
+                <div className="row">
                     <SortBy
                         onSort={handleSort}
                         onClearSort={clearSort}
@@ -97,50 +97,43 @@ const ProductsList = () => {
                         currentSortBy={sortBy.iter}
                         currentSortOrder={sortBy.order}
                     />
-
-                    <div className="text-center">
-                        <div className="row">
-                            {!categoriesLoadingStatus ? (
-                                <div className="col-md-1 offset-md-1">
-                                    <CategoriesList
-                                        categories={categories}
-                                        selectedItem={selectedCategory}
-                                        onItemSelect={handleSelect}
-                                    />
-                                    <button
-                                        className="btn btn-secondary mt-2"
-                                        onClick={clearFilter}
-                                    >
-                                        Очистить
-                                    </button>{" "}
-                                </div>
-                            ) : (
-                                "loading"
-                            )}
-
-                            <div className="d-flex flex-column col-md-6 offset-md-1">
-                                <div className="d-flex flex-column">
-                                    <SearchInput
-                                        onChange={handleChange}
-                                        value={search}
-                                        onClearSearch={handleClearSearch}
-                                    />
-                                    <ProductCard products={productsCrop} />
-                                </div>
-
-                                <div className="d-flex justify-content-center">
-                                    <Pagination
-                                        itemsCount={itemsCount}
-                                        pageSize={pageSize}
-                                        currentPage={currentPage}
-                                        onPageChange={handlePageChange}
-                                    />
-                                </div>
-                            </div>
+                </div>
+                <div className="row ">
+                    {!categoriesLoadingStatus ? (
+                        <div className="col-md-3 mt-4">
+                            <CategoriesList
+                                categories={categories}
+                                selectedItem={selectedCategory}
+                                onItemSelect={handleSelect}
+                            />
+                            <button
+                                className="btn btn-secondary mt-2"
+                                onClick={clearFilter}
+                            >
+                                Очистить
+                            </button>{" "}
+                        </div>
+                    ) : (
+                        "loading"
+                    )}
+                    <div className="col-md-6">
+                        <SearchInput
+                            onChange={handleChange}
+                            value={search}
+                            onClearSearch={handleClearSearch}
+                        />
+                        <ProductCard products={productsCrop} />
+                        <div className="content-center">
+                            <Pagination
+                                itemsCount={itemsCount}
+                                pageSize={pageSize}
+                                currentPage={currentPage}
+                                onPageChange={handlePageChange}
+                            />
                         </div>
                     </div>
-                </>
-            </>
+                </div>
+            </div>
         );
     }
     return "Loading...";

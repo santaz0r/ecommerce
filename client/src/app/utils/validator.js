@@ -3,10 +3,14 @@ export function validator(data, config) {
     function validate(validateMethod, data, config) {
         let statusValidate;
         switch (validateMethod) {
-            case "isRequired":
-                statusValidate = data.trim() === "";
-
+            case "isRequired": {
+                if (typeof data === "boolean") {
+                    statusValidate = !data;
+                } else {
+                    statusValidate = data.trim() === "";
+                }
                 break;
+            }
             case "isEmail": {
                 const emailRegExp = /^\S+@\S+\.\S+$/g;
                 statusValidate = !emailRegExp.test(data);
@@ -25,6 +29,15 @@ export function validator(data, config) {
             }
             case "min": {
                 statusValidate = data.length < config.value;
+                break;
+            }
+            case "max": {
+                statusValidate = data.length > config.value;
+                break;
+            }
+            case "isUrl": {
+                const urlRegExp = /[a-z]+:\/\/.+/g;
+                statusValidate = !urlRegExp.test(data);
                 break;
             }
 
